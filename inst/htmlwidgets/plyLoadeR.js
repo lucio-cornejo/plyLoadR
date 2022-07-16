@@ -16,11 +16,7 @@ HTMLWidgets.widget({
 
         var renderer, camera, cameraTarget, controls, scene;
 
-        init(el.id);
-
-        // Load PLY file
-        loadPLY(x.path, el.identifier);
-
+        init(x.path, el.id);
         animate();
 
         function loadPLY(path, identifier) {
@@ -42,7 +38,7 @@ HTMLWidgets.widget({
           });
         }
         
-        function init(identifier) {
+        function init(path, identifier) {
           // renderer
           renderer = new THREE.WebGLRenderer({ antialias: true });
           renderer.setPixelRatio(window.devicePixelRatio);
@@ -73,6 +69,9 @@ HTMLWidgets.widget({
           // scene.add( new THREE.AxesHelper( 20 ) );
           scene.add(new THREE.HemisphereLight("rgb(255, 255, 255)", "rgb(255, 255, 255)"));
       
+          // Load PLY file
+          loadPLY(path, identifier);
+
           // resize
           window.addEventListener("resize", onWindowResize, false);
         }
