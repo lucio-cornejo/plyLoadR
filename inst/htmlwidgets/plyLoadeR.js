@@ -16,7 +16,11 @@ HTMLWidgets.widget({
 
         var renderer, camera, cameraTarget, controls, scene;
 
-        init(x.path, el.id);
+        init(el.id);
+
+        // Load PLY file
+        loadPLY(x.path, el.identifier);
+
         animate();
 
         function loadPLY(path, identifier) {
@@ -38,45 +42,39 @@ HTMLWidgets.widget({
           });
         }
         
-        function init(path, identifier) {
-          if (document.getElementById(identifier)) {
-          } else {
-            // renderer
-            renderer = new THREE.WebGLRenderer({ antialias: true });
-            renderer.setPixelRatio(window.devicePixelRatio);
-            renderer.setSize(window.innerWidth / 1.715, window.innerHeight / 1.715);
-            renderer.outputEncoding = THREE.sRGBEncoding;
-            renderer.shadowMap.enabled = true;
-            document.getElementById(identifier).appendChild( renderer.domElement );
-        
-            // Camera
-            camera = new THREE.PerspectiveCamera(
-              35, window.innerWidth / window.innerHeight,
-              1, 1000
-            );
-            camera.position.set(25, 25, 25);
-        
-            cameraTarget = new THREE.Vector3(0, 0, 0);
-            camera.lookAt(cameraTarget);
-        
-            // Camera controls
-            controls = new THREE.TrackballControls( camera, renderer.domElement );
-        
-            // Scene
-            scene = new THREE.Scene();
-            scene.background = new THREE.Color("rgb(10%, 10%, 10%)");
-            document.getElementById(identifier).firstChild.scene = scene;
-            
-            // Lights
-            // scene.add( new THREE.AxesHelper( 20 ) );
-            scene.add(new THREE.HemisphereLight("rgb(255, 255, 255)", "rgb(255, 255, 255)"));
-        
-            // resize
-            window.addEventListener("resize", onWindowResize, false);
-          }
-        
-          // Load PLY file
-          loadPLY(path, identifier);
+        function init(identifier) {
+          // renderer
+          renderer = new THREE.WebGLRenderer({ antialias: true });
+          renderer.setPixelRatio(window.devicePixelRatio);
+          renderer.setSize(window.innerWidth / 1.715, window.innerHeight / 1.715);
+          renderer.outputEncoding = THREE.sRGBEncoding;
+          renderer.shadowMap.enabled = true;
+          document.getElementById(identifier).appendChild( renderer.domElement );
+      
+          // Camera
+          camera = new THREE.PerspectiveCamera(
+            35, window.innerWidth / window.innerHeight,
+            1, 1000
+          );
+          camera.position.set(25, 25, 25);
+      
+          cameraTarget = new THREE.Vector3(0, 0, 0);
+          camera.lookAt(cameraTarget);
+      
+          // Camera controls
+          controls = new THREE.TrackballControls( camera, renderer.domElement );
+      
+          // Scene
+          scene = new THREE.Scene();
+          scene.background = new THREE.Color("rgb(10%, 10%, 10%)");
+          document.getElementById(identifier).firstChild.scene = scene;
+          
+          // Lights
+          // scene.add( new THREE.AxesHelper( 20 ) );
+          scene.add(new THREE.HemisphereLight("rgb(255, 255, 255)", "rgb(255, 255, 255)"));
+      
+          // resize
+          window.addEventListener("resize", onWindowResize, false);
         }
         
         function onWindowResize() {
@@ -90,7 +88,6 @@ HTMLWidgets.widget({
           controls.update();
           renderer.render(scene, camera);
         }
-
       },
 
       resize: function(width, height) {
