@@ -19,7 +19,7 @@ function loadPLY(paths, identifier) {
 
 function init(paths, identifier) {
   // renderer
-  var renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth / 1.715, window.innerHeight / 1.715);
   renderer.outputEncoding = THREE.sRGBEncoding;
@@ -27,21 +27,21 @@ function init(paths, identifier) {
   document.getElementById(identifier).appendChild( renderer.domElement );
 
   // Camera
-  var camera = new THREE.PerspectiveCamera(
+  camera = new THREE.PerspectiveCamera(
     35, window.innerWidth / window.innerHeight,
     1, 1000
   );
   camera.position.set(25, 25, 25);
 
-  var cameraTarget = new THREE.Vector3(0, 0, 0);
+  cameraTarget = new THREE.Vector3(0, 0, 0);
   camera.lookAt(cameraTarget);
 
   // Camera controls
-  var controls = new THREE.TrackballControls( camera, renderer.domElement );
+  controls = new THREE.TrackballControls( camera, renderer.domElement );
   controls.update();
 
   // Scene
-  var scene = new THREE.Scene();
+  scene = new THREE.Scene();
   scene.background = new THREE.Color("rgb(10%, 10%, 10%)");
   document.getElementById(identifier).firstChild.scene = scene;
   
