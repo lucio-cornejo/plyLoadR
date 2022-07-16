@@ -19,7 +19,9 @@ HTMLWidgets.widget({
         if (document.getElementById(el.id)) {
           // Load PLY file
           loadPLY(x.paths, el.id);
+          console.log("a");
         } else {
+          console.log("b");
           init(x.paths, el.id);
           animate();
         }
