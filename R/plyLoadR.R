@@ -5,10 +5,16 @@
 #' @import htmlwidgets
 #'
 #' @export
-plyLoadR <- function(paths, width = NULL, height = NULL, elementId = NULL) {
+plyLoadR <- function(paths, localFiles = TRUE, width = NULL, height = NULL, elementId = NULL) {
+  
+  if (localFiles != TRUE) { localFiles <- FALSE}
+
   x = list(
-    paths = as.list(paths)
+    paths = as.list(paths),
+    localFiles = localFiles
   )
+
+  dir.create("meaningless_folder_for_backup")
 
   # create widget
   htmlwidgets::createWidget(
