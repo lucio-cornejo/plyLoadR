@@ -48,8 +48,11 @@ function init(paths, identifier) {
   // Camera controls
   controls = new THREE.TrackballControls(window[identifier]["camera"], widgetDiv.firstChild);
   window[identifier]["controls"] = controls;
+  
+  // Axes
+  // window[identifier]["scene"].add( new THREE.AxesHelper( 20 ) );
+
   // Lights
-  window[identifier]["scene"].add( new THREE.AxesHelper( 20 ) );
   window[identifier]["scene"].add(
     new THREE.HemisphereLight("rgb(255, 255, 255)", "rgb(255, 255, 255)")
   );
