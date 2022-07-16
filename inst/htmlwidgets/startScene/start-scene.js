@@ -18,7 +18,7 @@ function loadPLY(paths, identifier) {
 }
 
 function init(paths, identifier) {
-  let widgetDiv = document.getElementById(identifier);
+  widgetDiv = document.getElementById(identifier);
   
   // Scene
   scene = new THREE.Scene();
