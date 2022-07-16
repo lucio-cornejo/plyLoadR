@@ -11,7 +11,3 @@ dependencies:
     version: 134
     src: htmlwidgets/trackballControls
     script: "TrackballControls.js"
-  - name: sceneSetup
-    version: 1.0
-    src: htmlwidgets/sceneSetup
-    script: "scene-setup.js"
