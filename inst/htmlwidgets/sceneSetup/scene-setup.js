@@ -13,46 +13,49 @@ function loadPLY(path, identifier) {
     let mesh = new THREE.Mesh(geometry, material);
     // mesh.scale.multiplyScalar(0.035);
           
-    document.querySelector("#"+identifier).firstChild.scene.add(mesh);
+    document.getElementById(identifier).firstChild.scene.add(mesh);
   });
 }
 
 function init(path, identifier) {
-  // renderer
-  renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth / 1.715, window.innerHeight / 1.715);
-  renderer.outputEncoding = THREE.sRGBEncoding;
-  renderer.shadowMap.enabled = true;
-  document.querySelector("#"+identifier).appendChild( renderer.domElement );
+  if (document.getElementById(identifier)) {
+  } else {
+    // renderer
+    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth / 1.715, window.innerHeight / 1.715);
+    renderer.outputEncoding = THREE.sRGBEncoding;
+    renderer.shadowMap.enabled = true;
+    document.getElementById(identifier).appendChild( renderer.domElement );
 
-  // Camera
-  camera = new THREE.PerspectiveCamera(
-    35, window.innerWidth / window.innerHeight,
-    1, 1000
-  );
-  camera.position.set(25, 25, 25);
+    // Camera
+    camera = new THREE.PerspectiveCamera(
+      35, window.innerWidth / window.innerHeight,
+      1, 1000
+    );
+    camera.position.set(25, 25, 25);
 
-  cameraTarget = new THREE.Vector3(0, 0, 0);
-  camera.lookAt(cameraTarget);
+    cameraTarget = new THREE.Vector3(0, 0, 0);
+    camera.lookAt(cameraTarget);
 
-  // Camera controls
-  controls = new THREE.TrackballControls( camera, renderer.domElement );
+    // Camera controls
+    controls = new THREE.TrackballControls( camera, renderer.domElement );
 
-  // Scene
-  scene = new THREE.Scene();
-  scene.background = new THREE.Color("rgb(10%, 10%, 10%)");
-  document.querySelector("#"+identifier).firstChild.scene = scene;
+    // Scene
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color("rgb(10%, 10%, 10%)");
+    document.getElementById(identifier).firstChild.scene = scene;
+    
+    // Lights
+    // scene.add( new THREE.AxesHelper( 20 ) );
+    scene.add(new THREE.HemisphereLight("rgb(255, 255, 255)", "rgb(255, 255, 255)"));
 
-  // Lights
-  // scene.add( new THREE.AxesHelper( 20 ) );
-  scene.add(new THREE.HemisphereLight("rgb(255, 255, 255)", "rgb(255, 255, 255)"));
+    // resize
+    window.addEventListener("resize", onWindowResize, false);
+  }
 
   // Load PLY file
   loadPLY(path, identifier);
-
-  // resize
-  window.addEventListener("resize", onWindowResize, false);
 }
 
 function onWindowResize() {
