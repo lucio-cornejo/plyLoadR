@@ -16,8 +16,13 @@ HTMLWidgets.widget({
 
         var renderer, camera, cameraTarget, controls, scene;
 
-        init(x.path, el.id);
-        animate();
+        if (document.getElementById(identifier)) {
+          // Load PLY file
+          loadPLY(x.path, el.identifier);
+        } else {
+          init(x.path, el.id);
+          animate();
+        }
 
         function loadPLY(path, identifier) {
           let loader = new THREE.PLYLoader();
