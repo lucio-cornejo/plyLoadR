@@ -13,7 +13,7 @@ function loadPLY(paths) {
     let mesh = new THREE.Mesh(geometry, material);
     // mesh.scale.multiplyScalar(0.035);
           
-    scene.add(mesh);
+    document.querySelector("#"+identifier).firstChild.scene.add(mesh);
   });
 }
 
@@ -42,6 +42,7 @@ function init(paths, identifier) {
   // Scene
   scene = new THREE.Scene();
   scene.background = new THREE.Color("rgb(10%, 10%, 10%)");
+  document.querySelector("#"+identifier).firstChild.scene = scene;
 
   // Lights
   // scene.add( new THREE.AxesHelper( 20 ) );
@@ -49,7 +50,7 @@ function init(paths, identifier) {
 
   // Load PLY files
   // for(let i=0; i < paths.length; i++) {
-    loadPLY(paths);
+    loadPLY(paths, identifier);
   // }
 
   // resize

@@ -14,10 +14,6 @@ HTMLWidgets.widget({
 
         // TODO: code to render the widget, e.g.
 
-        el.innerText = x.message;
-        
-        // ['https://drive.google.com/uc?export=download&id=1ru8Ezy452cRoNhO8WRq4s-WU3PEz6l-3']
-
         init(x.paths, el.id);
         animate();
 
