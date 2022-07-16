@@ -14,7 +14,7 @@ HTMLWidgets.widget({
 
         // TODO: code to render the widget, e.g.
 
-        init(x.paths, el.id);
+        init(x.path, el.id);
         animate();
 
       },
