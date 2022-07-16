@@ -13,16 +13,8 @@ HTMLWidgets.widget({
       renderValue: function(x) {
 
         // TODO: code to render the widget, e.g.
-
-        var renderer, camera, cameraTarget, controls, scene;
-
-        if (x.new === false) {
-          // Load PLY file
-          loadPLY(x.paths, el.id);
-        } else {
-          init(x.paths, el.id);
-          animate();
-        }
+        init(x.paths, el.id);
+        animate();
       },
 
       resize: function(width, height) {

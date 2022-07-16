@@ -5,12 +5,9 @@
 #' @import htmlwidgets
 #'
 #' @export
-plyLoadeR <- function(paths, new, width = NULL, height = NULL, elementId = NULL) {
-
-  # forward options using x
+plyLoadeR <- function(paths, width = NULL, height = NULL, elementId = NULL) {
   x = list(
-    paths = paths,
-    new = new
+    paths = paths
   )
 
   # create widget
