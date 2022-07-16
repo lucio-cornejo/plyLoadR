@@ -13,7 +13,7 @@ function loadPLY(paths, identifier) {
     let mesh = new THREE.Mesh(geometry, material);
     // mesh.scale.multiplyScalar(0.035);
           
-    document.getElementById(identifier).firstChild.scene.add(mesh);
+    window[identifier]["scene"].add(mesh);
   });
 }
 
