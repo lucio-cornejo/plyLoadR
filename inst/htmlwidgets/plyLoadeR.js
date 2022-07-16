@@ -16,7 +16,7 @@ HTMLWidgets.widget({
 
         var renderer, camera, cameraTarget, controls, scene;
 
-        if (document.getElementById(identifier)) {
+        if (document.getElementById(el.identifier)) {
           // Load PLY file
           loadPLY(x.path, el.identifier);
         } else {
