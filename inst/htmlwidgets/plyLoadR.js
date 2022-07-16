@@ -1,6 +1,6 @@
 HTMLWidgets.widget({
 
-  name: 'plyLoadeR',
+  name: 'plyLoadR',
 
   type: 'output',
 
