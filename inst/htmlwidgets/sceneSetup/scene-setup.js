@@ -1,4 +1,4 @@
-function loadPLY(paths) {
+function loadPLY(paths, identifier) {
   let loader = new THREE.PLYLoader();
   loader.load(paths, function (geometry) {
     geometry.computeVertexNormals();
