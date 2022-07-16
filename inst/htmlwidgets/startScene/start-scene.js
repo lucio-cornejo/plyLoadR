@@ -18,13 +18,22 @@ function loadPLY(paths, identifier) {
 }
 
 function init(paths, identifier) {
+  let widgetDiv = document.getElementById(identifier);
+  
+  // Scene
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color("rgb(10%, 10%, 10%)");
+  widgetDiv.firstChild.scene = scene;
+  
   // renderer
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
   renderer.setSize(window.innerWidth / 1.715, window.innerHeight / 1.715);
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.shadowMap.enabled = true;
-  document.getElementById(identifier).appendChild( renderer.domElement );
+  widgetDiv.appendChild( renderer.domElement );
+
+  widgetDiv.firstChild.scene.add(renderer); 
 
   // Camera
   camera = new THREE.PerspectiveCamera(
@@ -40,11 +49,6 @@ function init(paths, identifier) {
   controls = new THREE.TrackballControls( camera, renderer.domElement );
   controls.update();
 
-  // Scene
-  scene = new THREE.Scene();
-  scene.background = new THREE.Color("rgb(10%, 10%, 10%)");
-  document.getElementById(identifier).firstChild.scene = scene;
-  
   // Lights
   // scene.add( new THREE.AxesHelper( 20 ) );
   scene.add(new THREE.HemisphereLight("rgb(255, 255, 255)", "rgb(255, 255, 255)"));
