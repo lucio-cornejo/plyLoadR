@@ -1,6 +1,6 @@
-function loadPLY(paths, identifier) {
+function loadPLY(path, identifier) {
   let loader = new THREE.PLYLoader();
-  loader.load(paths, function (geometry) {
+  loader.load(path, function (geometry) {
     geometry.computeVertexNormals();
     
     let material = new THREE.MeshStandardMaterial({
@@ -55,7 +55,9 @@ function init(paths, identifier) {
   );
 
   // Load PLY file
-  loadPLY(paths, identifier);
+  for (let i=0; i < paths.length; i++) {
+    loadPLY(paths[i], identifier);
+  }
 
   // resize
   window.addEventListener("resize", onWindowResize(identifier), false);
@@ -68,7 +70,7 @@ function onWindowResize(identifier) {
 }
 
 function animate(identifier) {
-  requestAnimationFrame( function() { animate(identifier) } );  
+  requestAnimationFrame( function () { animate(identifier) } );  
   window[identifier]["controls"].update();
   window[identifier]["renderer"].render(
     window[identifier]["scene"], window[identifier]["camera"]

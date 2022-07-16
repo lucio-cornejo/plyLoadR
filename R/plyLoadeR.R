@@ -7,7 +7,7 @@
 #' @export
 plyLoadeR <- function(paths, width = NULL, height = NULL, elementId = NULL) {
   x = list(
-    paths = paths
+    paths = as.list(paths)
   )
 
   # create widget
