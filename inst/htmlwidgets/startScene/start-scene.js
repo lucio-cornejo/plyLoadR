@@ -18,12 +18,8 @@ function loadPLY(paths, identifier) {
 }
 
 function init(paths, identifier) {
-  widgetDiv = document.getElementById(identifier);
-  
-  // Scene
-  scene = new THREE.Scene();
-  scene.background = new THREE.Color("rgb(10%, 10%, 10%)");
-  widgetDiv.firstChild.scene = scene;
+  window[identifier] = {};
+  let widgetDiv = document.getElementById(identifier);
   
   // renderer
   renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -33,41 +29,48 @@ function init(paths, identifier) {
   renderer.shadowMap.enabled = true;
   widgetDiv.appendChild( renderer.domElement );
 
-  widgetDiv.firstChild.scene.add(renderer); 
-
+  // Scene
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color("rgb(10%, 10%, 10%)");
+  window[identifier]["scene"] = scene;
+  window[identifier]["renderer"] = renderer;
+  
   // Camera
   camera = new THREE.PerspectiveCamera(
     35, window.innerWidth / window.innerHeight,
     1, 1000
   );
   camera.position.set(25, 25, 25);
-
-  cameraTarget = new THREE.Vector3(0, 0, 0);
-  camera.lookAt(cameraTarget);
+  // cameraTarget = new THREE.Vector3(0, 0, 0);
+  // camera.lookAt(cameraTarget);
+  window[identifier]["camera"] = camera;
 
   // Camera controls
-  controls = new THREE.TrackballControls( camera, renderer.domElement );
-  controls.update();
-
+  controls = new THREE.TrackballControls(window[identifier]["camera"], widgetDiv.firstChild);
+  window[identifier]["controls"] = controls;
   // Lights
-  // scene.add( new THREE.AxesHelper( 20 ) );
-  scene.add(new THREE.HemisphereLight("rgb(255, 255, 255)", "rgb(255, 255, 255)"));
+  window[identifier]["scene"].add( new THREE.AxesHelper( 20 ) );
+  window[identifier]["scene"].add(
+    new THREE.HemisphereLight("rgb(255, 255, 255)", "rgb(255, 255, 255)")
+  );
 
   // Load PLY file
   loadPLY(paths, identifier);
 
   // resize
-  window.addEventListener("resize", onWindowResize, false);
+  window.addEventListener("resize", onWindowResize(identifier), false);
 }
 
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth / 1.715, window.innerHeight / 1.715);
+function onWindowResize(identifier) {
+  window[identifier]["camera"].aspect = window.innerWidth / window.innerHeight;
+  window[identifier]["camera"].updateProjectionMatrix();
+  window[identifier]["renderer"].setSize(window.innerWidth / 1.715, window.innerHeight / 1.715);
 }
 
-function animate() {
-  requestAnimationFrame( animate );  
-  controls.update();
-  renderer.render(scene, camera);
+function animate(identifier) {
+  requestAnimationFrame( function() { animate(identifier) } );  
+  window[identifier]["controls"].update();
+  window[identifier]["renderer"].render(
+    window[identifier]["scene"], window[identifier]["camera"]
+  );
 }
