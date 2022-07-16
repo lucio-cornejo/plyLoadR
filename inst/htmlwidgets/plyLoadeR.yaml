@@ -1,0 +1,17 @@
+dependencies:
+  - name: three
+    version: 134
+    src: htmlwidgets/three
+    script: "three.js"
+  - name: loadPLY
+    version: 134
+    src: htmlwidgets/loadPLY
+    script: "PLYLoader.js"
+  - name: TrackballControls
+    version: 134
+    src: htmlwidgets/trackballControls
+    script: "TrackballControls.js"
+  - name: sceneSetup
+    version: 1.0
+    src: htmlwidgets/sceneSetup
+    script: "scene-setup.js"
