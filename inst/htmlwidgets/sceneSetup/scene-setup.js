@@ -39,7 +39,7 @@ function init(path, identifier) {
     camera.lookAt(cameraTarget);
 
     // Camera controls
-    controls = new THREE.TrackballControls( camera, renderer.domElement );
+    var controls = new THREE.TrackballControls( camera, renderer.domElement );
 
     // Scene
     var scene = new THREE.Scene();
