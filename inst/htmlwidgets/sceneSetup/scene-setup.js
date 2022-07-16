@@ -1,6 +1,6 @@
-function loadPLY(paths, index) {
+function loadPLY(paths) {
   let loader = new THREE.PLYLoader();
-  loader.load(paths[index], function (geometry) {
+  loader.load(paths, function (geometry) {
     geometry.computeVertexNormals();
     
     let material = new THREE.MeshStandardMaterial({
@@ -17,7 +17,7 @@ function loadPLY(paths, index) {
   });
 }
 
-function init(identifier, paths) {
+function init(paths, identifier) {
   // renderer
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
@@ -48,9 +48,9 @@ function init(identifier, paths) {
   scene.add(new THREE.HemisphereLight("rgb(255, 255, 255)", "rgb(255, 255, 255)"));
 
   // Load PLY files
-  for(let i=0; i < paths.length; i++) {
-    loadPLY(paths, i);
-  }
+  // for(let i=0; i < paths.length; i++) {
+    loadPLY(paths);
+  // }
 
   // resize
   window.addEventListener("resize", onWindowResize, false);
