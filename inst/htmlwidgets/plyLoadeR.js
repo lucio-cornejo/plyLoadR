@@ -16,12 +16,10 @@ HTMLWidgets.widget({
 
         var renderer, camera, cameraTarget, controls, scene;
 
-        if (document.getElementById(el.id)) {
+        if (x.new === false) {
           // Load PLY file
           loadPLY(x.paths, el.id);
-          console.log("a");
         } else {
-          console.log("b");
           init(x.paths, el.id);
           animate();
         }
