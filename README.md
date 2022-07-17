@@ -8,8 +8,7 @@ in the cases where such widget does not
 optimally render graphics. 
 
 As an alternative, the three.js library is
-being used in order to render graphics via
-loading its respective .ply files.
+being used in order to render graphics.
 
 These are sme of the cases where the 
 plyLoadR widget is, in the opinion of its
@@ -57,9 +56,28 @@ HTML.
 
 Like the previous solution, the plyLoadR
 approach requires the conversion of rgl
-geometries into ply files. Then, the plyLoadR such ply
-widget loads such ply files into HTMl,
-without the need of rerunning the rgl
-code for the geometries creation, nor the
-embedding of such geometries into the
+geometries into ply files. Then, the plyLoadR
+widget loads such ply files into the final
+HTMl, without the need of rerunning the
+rgl code for the geometries' creation, nor
+the embedding of such geometries into the
 markdown file which Pandoc will convert.
+
+In some cases, such solution has reduced
+the rendering time of graphics previously
+displayed via rgl, from 5 minutes, to
+10 seconds.
+
+### Case 3
+
+The rglwidget does provide JavaScript
+methods for modifying the rgl graphic 
+inserted into a HTML. However, the 
+official documentation for those methods
+is quite poor.
+
+Besides this, the use of three.js when
+rendering graphics via plyLoadR provides 
+many more tools for adding custom 
+interactivity to the graphic, via
+appropriate JavaScript methods.
