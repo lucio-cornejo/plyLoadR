@@ -37,7 +37,8 @@ function init(x, identifier) {
   // renderer
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setSize(window.innerWidth / 1.715, window.innerHeight / 1.715);
+  // renderer.setSize(window.innerWidth / 1.715, window.innerHeight / 1.715);
+  renderer.setSize(window.innerWidth / 1.776, window.innerHeight / 1.586);
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.shadowMap.enabled = true;
   widgetDiv.appendChild( renderer.domElement );
