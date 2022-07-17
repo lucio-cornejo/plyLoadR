@@ -5,7 +5,7 @@
 #' @import htmlwidgets
 #'
 #' @export
-plyLoadR <- function(paths, localFiles = TRUE, plyCopiesFolder = "ply_local_copies", width = NULL, height = NULL, elementId = NULL) {
+plyLoadR <- function(paths, localFiles = TRUE, plyCopiesFolder = "ply_local_copies", ..., width = NULL, height = NULL, elementId = NULL) {
   # If the files are not contained in some path further down
   # the file where this widget is being used, then, loading
   # the ply files in a local server will not be possible.
@@ -35,11 +35,11 @@ plyLoadR <- function(paths, localFiles = TRUE, plyCopiesFolder = "ply_local_copi
 
   x = list(
     paths = as.list(new_paths),
-    localFiles = localFiles
+    localFiles = localFiles,
+    settings = list(...)
   )
-
   
-  # create widget
+  # Create widget
   htmlwidgets::createWidget(
     name = 'plyLoadR',
     x,
