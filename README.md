@@ -59,7 +59,7 @@ geometries into ply files. Then, the plyLoadR
 widget loads such ply files into the final
 HTML, without the need of rerunning the
 rgl code for such geometries' creation, nor
-of embedding of such geometries into the
+of embedding such geometries into the
 markdown file which Pandoc will convert.
 
 In some cases, such solution has reduced
