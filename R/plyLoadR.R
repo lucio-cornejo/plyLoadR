@@ -1,4 +1,4 @@
-#' <Add Title>
+#' Load ply files into a three.js scene
 #'
 #' <Add Description>
 #'
