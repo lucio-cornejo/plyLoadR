@@ -2,8 +2,8 @@
 
 ## Goal
 
-This htmlwidget aims to provide an alternative
-to the use of the rgl htmlwidget, but only
+The plyLoadR htmlwidget aims to provide an alternative
+to the use of the rgl widget, but only
 in the cases where such widget does not
 optimally render graphics. 
 
