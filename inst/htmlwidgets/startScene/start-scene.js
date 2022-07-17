@@ -4,9 +4,9 @@ function loadPLY(x, index, identifier) {
     geometry.computeVertexNormals();
     
     let material = new THREE.MeshStandardMaterial({
-        wireframe: x.settings.isWireframe === "undefined" ? false : x.settings.isWireframe,
-        opacity: x.settings.opacity === "undefined" ? 1 : x.settings.opacity,
-        transparent: x.settings.isTransparent === "undefined" ? false : x.settings.isTransparent,
+        wireframe: ('isWireframe' in x.settings) ? false : x.settings.isWireframe,
+        opacity: ('opacity' in x.settings) ? 1 : x.settings.opacity,
+        transparent: ('isTransparent' in x.settings) ? false : x.settings.isTransparent,
         vertexColors: THREE.VertexColors
       });
     
