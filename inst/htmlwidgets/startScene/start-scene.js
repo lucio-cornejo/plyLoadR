@@ -1,12 +1,12 @@
-function loadPLY(path, identifier) {
+function loadPLY(x, index, identifier) {
   let loader = new THREE.PLYLoader();
-  loader.load(path, function (geometry) {
+  loader.load(x.paths[index], function (geometry) {
     geometry.computeVertexNormals();
     
     let material = new THREE.MeshStandardMaterial({
-        wireframe: false,
-        opacity: 1,
-        transparent: true,
+        wireframe: x.settings.isWireframe === "undefined" ? false : x.settings.isWireframe,
+        opacity: x.settings.opacity === "undefined" ? 1 : x.settings.opacity,
+        transparent: x.settings.isTransparent === "undefined" ? false : x.settings.isTransparent,
         vertexColors: THREE.VertexColors
       });
     
@@ -17,7 +17,7 @@ function loadPLY(path, identifier) {
   });
 }
 
-function init(paths, identifier) {
+function init(x, identifier) {
   window[identifier] = {};
   let widgetDiv = document.getElementById(identifier);
   
@@ -58,8 +58,8 @@ function init(paths, identifier) {
   );
 
   // Load PLY file
-  for (let i=0; i < paths.length; i++) {
-    loadPLY(paths[i], identifier);
+  for (let index = 0; index < x.paths.length; index++) {
+    loadPLY(x, index, identifier);
   }
 
   // resize
