@@ -10,7 +10,7 @@ optimally render graphics.
 As an alternative, the three.js library is
 being used in order to render graphics.
 
-These are sme of the cases where the 
+These are some of the cases where the 
 plyLoadR widget is, in the opinion of its
 creator (me and all my bias), a great
 alternative to rgl:
@@ -35,7 +35,7 @@ the geometry displayed is complex/heavy
 enough, the rgl graphics turn out laggy.
 
 The plyLoadR solution consists in, first,
-use rgl to save the geometries required
+using rgl to save the geometries required
 into ply files; and, then, loading such
 ply files with the plyLoadR widget. 
 
@@ -51,15 +51,14 @@ time its respective file (Rmd, for example)
 gets rendered. However, such rendering
 process may take too long, even when using
 the cache chunk property, due to Pandoc's
-conversion of the markdown file into a 
-HTML.
+conversion of the markdown file into HTML.
 
 Like the previous solution, the plyLoadR
 approach requires the conversion of rgl
 geometries into ply files. Then, the plyLoadR
 widget loads such ply files into the final
-HTMl, without the need of rerunning the
-rgl code for the geometries' creation, nor
+HTML, without the need of rerunning the
+rgl code for such geometries' creation, nor
 the embedding of such geometries into the
 markdown file which Pandoc will convert.
 
