@@ -17,15 +17,15 @@ function loadPLY(x, index, identifier) {
 
     if ('isWireframe' in x.settings) {
       window[identifier].scene.children.at(-1)
-        .material.wireframe = x.settings.isWireframe;
+        .material.wireframe = x.settings.isWireframe[index];
     }
     if ('opacity' in x.settings) {
       window[identifier].scene.children.at(-1)
-        .material.opacity = x.settings.opacity;
+        .material.opacity = x.settings.opacity[index];
     }
     if ('isTransparent' in x.settings) {
       window[identifier].scene.children.at(-1)
-        .material.transparent = x.settings.isTransparent;
+        .material.transparent = x.settings.isTransparent[index];
     }
   });
 }
