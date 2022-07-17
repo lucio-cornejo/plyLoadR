@@ -69,7 +69,7 @@ displayed via rgl, from 5 minutes, to
 
 ### Case 3
 
-The rglwidget does provide JavaScript
+The rgl widget does provide JavaScript
 methods for modifying the rgl graphic 
 inserted into a HTML. However, the 
 official documentation for those methods
