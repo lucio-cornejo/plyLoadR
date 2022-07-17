@@ -80,4 +80,4 @@ Besides this, the use of three.js when
 rendering graphics via plyLoadR provides 
 many more tools for adding custom 
 interactivity to the graphic, via
-appropriate JavaScript methods.
+appropriate JavaScript use.
