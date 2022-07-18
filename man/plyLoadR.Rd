@@ -2,12 +2,13 @@
 % Please edit documentation in R/plyLoadR.R
 \name{plyLoadR}
 \alias{plyLoadR}
-\title{<Add Title>}
+\title{Load ply files into a three.js scene}
 \usage{
 plyLoadR(
   paths,
   localFiles = TRUE,
   plyCopiesFolder = "ply_local_copies",
+  ...,
   width = NULL,
   height = NULL,
   elementId = NULL
