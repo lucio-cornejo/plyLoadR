@@ -36,7 +36,8 @@ plyLoadR <- function(paths, localFiles = TRUE, plyCopiesFolder = "ply_local_copi
   x = list(
     paths = as.list(new_paths),
     localFiles = localFiles,
-    settings = ...
+    # settings = ...
+    settings = ifelse(length(...) > 0, ..., list())
   )
   
   # Create widget
