@@ -13,11 +13,11 @@ function loadPLY(x, index, identifier) {
     if (x.settings) {
       switch (true) {
         case ('isWireframe' in x.settings):
-          material.wireframe = x.settings.isWireframe;
+          material.wireframe = x.settings.isWireframe[index];
         case ('isTransparent' in x.settings):
-          material.transparent = x.settings.isTransparent;
+          material.transparent = x.settings.isTransparent[index];
         case ('opacity' in x.settings):
-          material.opacity = x.settings.opacity;
+          material.opacity = x.settings.opacity[index];
       }
     }
 
@@ -53,6 +53,17 @@ function init(x, identifier) {
     1, 1000
   );
   camera.position.set(25, 25, 25);
+  
+  if (x.settings) {
+    if ('camera' in x.settings) {
+      if ('position' in x.settings.camera) {
+        camera.position.x = x.settings.camera.position[0];
+        camera.position.y = x.settings.camera.position[1];
+        camera.position.z = x.settings.camera.position[2];
+      }
+    }
+  }
+
   // cameraTarget = new THREE.Vector3(0, 0, 0);
   // camera.lookAt(cameraTarget);
   window[identifier]["camera"] = camera;

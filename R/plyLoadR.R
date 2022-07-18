@@ -38,6 +38,22 @@ plyLoadR <- function(paths, localFiles = TRUE, plyCopiesFolder = "ply_local_copi
     localFiles = localFiles,
     settings = ...
   )
+
+  if ("settings" %in% names(x)) {
+    settings_to_expand <- c(
+      "isWireframe",
+      "isTransparent",
+      "opacity"
+    )
+    for (setting in names(x$settings)) {
+      if (setting %in% settings_to_expand) {
+        x$settings[[setting]] <- rep(
+          x$settings[[setting]], 
+          length.out = length(x$paths)
+        )
+      }
+    }
+  } 
   
   # Create widget
   htmlwidgets::createWidget(
