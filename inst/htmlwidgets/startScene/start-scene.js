@@ -15,17 +15,19 @@ function loadPLY(x, index, identifier) {
           
     window[identifier]["scene"].add(mesh);
 
-    if ('isWireframe' in x.settings) {
-      window[identifier].scene.children.at(-1)
-        .material.wireframe = x.settings.isWireframe[index];
-    }
-    if ('opacity' in x.settings) {
-      window[identifier].scene.children.at(-1)
-        .material.opacity = x.settings.opacity[index];
-    }
-    if ('isTransparent' in x.settings) {
-      window[identifier].scene.children.at(-1)
-        .material.transparent = x.settings.isTransparent[index];
+    if (x.settings) {
+      if ('isWireframe' in x.settings) {
+        window[identifier].scene.children.at(-1)
+          .material.wireframe = x.settings.isWireframe[index];
+      }
+      if ('opacity' in x.settings) {
+        window[identifier].scene.children.at(-1)
+          .material.opacity = x.settings.opacity[index];
+      }
+      if ('isTransparent' in x.settings) {
+        window[identifier].scene.children.at(-1)
+          .material.transparent = x.settings.isTransparent[index];
+      }
     }
   });
 }
