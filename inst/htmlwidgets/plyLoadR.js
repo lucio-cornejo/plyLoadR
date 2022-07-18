@@ -12,7 +12,6 @@ HTMLWidgets.widget({
 
       renderValue: function (x) {
 
-        // TODO: code to render the widget, e.g.
         init(x, el.id);
         // init(x.paths, el.id);
         animate(el.id);

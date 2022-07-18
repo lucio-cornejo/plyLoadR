@@ -4,31 +4,27 @@ function loadPLY(x, index, identifier) {
     geometry.computeVertexNormals();
     
     let material = new THREE.MeshStandardMaterial({
-        wireframe: false,
-        opacity: 1,
-        transparent: false,
-        vertexColors: THREE.VertexColors
-      });
+      wireframe: false,
+      opacity: 1,
+      transparent: false,
+      vertexColors: THREE.VertexColors
+    });
+
+    if (x.settings) {
+      switch (true) {
+        case ('isWireframe' in x.settings):
+          material.wireframe = x.settings.isWireframe;
+        case ('isTransparent' in x.settings):
+          material.transparent = x.settings.isTransparent;
+        case ('opacity' in x.settings):
+          material.opacity = x.settings.opacity;
+      }
+    }
 
     let mesh = new THREE.Mesh(geometry, material);
     // mesh.scale.multiplyScalar(0.035);
-          
+    
     window[identifier]["scene"].add(mesh);
-
-    if (x.settings) {
-      if ('isWireframe' in x.settings) {
-        window[identifier].scene.children.at(-1)
-          .material.wireframe = x.settings.isWireframe[index];
-      }
-      if ('opacity' in x.settings) {
-        window[identifier].scene.children.at(-1)
-          .material.opacity = x.settings.opacity[index];
-      }
-      if ('isTransparent' in x.settings) {
-        window[identifier].scene.children.at(-1)
-          .material.transparent = x.settings.isTransparent[index];
-      }
-    }
   });
 }
 
