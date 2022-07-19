@@ -50,7 +50,8 @@ plyLoadR <- function(paths, localFiles = TRUE, plyCopiesFolder = "ply_local_copi
     settings_to_expand <- c(
       "isWireframe",
       "isTransparent",
-      "opacity"
+      "opacity",
+      "toggleLabels"
     )
     for (setting in names(x$settings)) {
       if (setting %in% settings_to_expand) {

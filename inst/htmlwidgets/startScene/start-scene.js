@@ -97,19 +97,19 @@ function init(x, identifier) {
         // Set labels for opacity buttons
         let toggleLabels = [...Array(x.paths.length).keys()];
         if ('toggleLabels' in x.settings) {
-          toggleLabels = x.settings.toggleLabels;
+          toggleLabels = Object.values(x.settings.toggleLabels);
         }
         opacityControlsHTML +=
           '  <input type="button" class="opacity-button selected"'
-          + ' data-child="1' + '" value="' 
-          + toggleLabels[0] + '">\n';
+          + ' data-child="1' + '" value=' 
+          + toggleLabels[0] + ' >\n';
 
         // Insert remaining buttons
         for (let i=1; i < x.paths.length; i++) {
           opacityControlsHTML += 
             '  <input type="button" class="opacity-button"'
-            + 'data-child="' + String(i+1) + '" value="'
-            + toggleLabels[i] + '">\n';
+            + 'data-child="' + String(i+1) + '" value='
+            + toggleLabels[i] + ' >\n';
         }
       
         opacityControlsHTML += '</div>\n';
