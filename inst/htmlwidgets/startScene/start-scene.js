@@ -11,13 +11,14 @@ function loadPLY(x, index, identifier) {
     });
 
     if (x.settings) {
-      switch (true) {
-        case ('isWireframe' in x.settings):
-          material.wireframe = x.settings.isWireframe[index];
-        case ('isTransparent' in x.settings):
-          material.transparent = x.settings.isTransparent[index];
-        case ('opacity' in x.settings):
-          material.opacity = x.settings.opacity[index];
+      if ('isWireframe' in x.settings) {
+        material.wireframe = x.settings.isWireframe[index];
+      }
+      if ('isTransparent' in x.settings) {
+        material.transparent = x.settings.isTransparent[index];
+      }
+      if ('opacity' in x.settings) {
+        material.opacity = x.settings.opacity[index];
       }
     }
 
