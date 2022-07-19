@@ -70,7 +70,12 @@ plyLoadR <- function(paths, localFiles = TRUE, plyCopiesFolder = "ply_local_copi
     width = width,
     height = height,
     package = 'plyLoadR',
-    elementId = elementId
+    elementId = elementId,
+    sizingPolicy = htmlwidgets::sizingPolicy(
+      defaultWidth = "100%",
+      padding = 0,
+      browser.fill = FALSE
+    )
   )
 }
 
