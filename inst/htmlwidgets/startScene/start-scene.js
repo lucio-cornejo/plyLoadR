@@ -71,6 +71,8 @@ function init(x, identifier) {
     new THREE.HemisphereLight("rgb(255, 255, 255)", "rgb(255, 255, 255)")
   );
 
+  // By default, do not insert controls for opacity
+  activateOpacityControls = false;
   if (x.settings) {
     if ('camera' in x.settings) {
       if ('position' in x.settings.camera) {
