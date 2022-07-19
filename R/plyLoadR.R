@@ -53,6 +53,10 @@ plyLoadR <- function(paths, localFiles = TRUE, plyCopiesFolder = "ply_local_copi
       "opacity",
       "toggleLabels"
     )
+    # Remove names for values to be applied as labels
+    if ("toggleLabels" %in% names(x$settings)) {
+      x$settings[["toggleLabels"]] <- unname(x$settings[["toggleLabels"]])
+    }
     for (setting in names(x$settings)) {
       if (setting %in% settings_to_expand) {
         x$settings[[setting]] <- rep(
