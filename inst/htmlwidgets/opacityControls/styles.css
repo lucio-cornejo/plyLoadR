@@ -1,0 +1,14 @@
+.opacity-slider {
+  width: 100%;
+  margin-top: 20px;
+}
+.opacity-buttons-section {
+  display: flex;
+  justify-content: space-between;
+}
+input[type="button"].opacity-button:hover {
+  background-color: rgb(80, 200, 120);
+}
+input[type="button"].opacity-button.selected {
+  background-color: rgb(34, 139, 34);
+}

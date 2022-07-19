@@ -15,6 +15,11 @@ plyLoadR <- function(paths, localFiles = TRUE, plyCopiesFolder = "ply_local_copi
   new_paths <- unlist(paths)
   if (!localFiles) {
     temp_folder_name <- plyCopiesFolder
+    # Create the folders for the ply copies
+    dir.create(temp_folder_name)
+    temp_folder_name <- paste0(
+      temp_folder_name, "/", elementId
+    )
     dir.create(temp_folder_name)
 
     for (i in 1:length(paths)) {
@@ -39,6 +44,8 @@ plyLoadR <- function(paths, localFiles = TRUE, plyCopiesFolder = "ply_local_copi
     settings = ...
   )
 
+  # Expand some arguments in "settings", if their
+  # length doesn't match the number of paths given.
   if ("settings" %in% names(x)) {
     settings_to_expand <- c(
       "isWireframe",

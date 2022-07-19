@@ -47,7 +47,7 @@ function init(x, identifier) {
   scene.background = new THREE.Color("rgb(10%, 10%, 10%)");
   window[identifier]["scene"] = scene;
   window[identifier]["renderer"] = renderer;
-  
+
   // Camera
   camera = new THREE.PerspectiveCamera(
     35, window.innerWidth / window.innerHeight,
@@ -55,16 +55,6 @@ function init(x, identifier) {
   );
   camera.position.set(25, 25, 25);
   
-  if (x.settings) {
-    if ('camera' in x.settings) {
-      if ('position' in x.settings.camera) {
-        camera.position.x = x.settings.camera.position[0];
-        camera.position.y = x.settings.camera.position[1];
-        camera.position.z = x.settings.camera.position[2];
-      }
-    }
-  }
-
   // cameraTarget = new THREE.Vector3(0, 0, 0);
   // camera.lookAt(cameraTarget);
   window[identifier]["camera"] = camera;
@@ -81,13 +71,83 @@ function init(x, identifier) {
     new THREE.HemisphereLight("rgb(255, 255, 255)", "rgb(255, 255, 255)")
   );
 
-  // Load PLY file
+  if (x.settings) {
+    if ('camera' in x.settings) {
+      if ('position' in x.settings.camera) {
+        camera.position.x = x.settings.camera.position[0];
+        camera.position.y = x.settings.camera.position[1];
+        camera.position.z = x.settings.camera.position[2];
+      }
+    }
+    if ('toggleWidgets' in x.settings) {
+      if (x.settings.toggleWidgets === true) {
+        // Insert slider for opacity
+        let opacityControlsHTML = 
+          '<input id="' + identifier + 'Slider'
+          + '" class="opacity-slider" type="range"'
+          + 'min="1" ' + `max=${x.paths.length}` 
+          + ' step="0.05" value="1" >\n';
+        
+        // Insert div for opacity buttons
+        opacityControlsHTML += 
+          '<div class="opacity-buttons-section">\n'
+
+        // Set labels for opacity buttons
+        let toggleLabels = [...Array(x.paths.length).keys()];
+        if ('toggleLabels' in x.settings) {
+          toggleLabels = x.settings.toggleLabels;
+        }
+        opacityControlsHTML +=
+          '  <input type="button" class="opacity-button selected"'
+          + ' data-child="1' + '" value="' 
+          + toggleLabels[0] + '">\n';
+
+        // Insert remaining buttons
+        for (let i=1; i < x.paths.length; i++) {
+          opacityControlsHTML += 
+            '  <input type="button" class="opacity-button"'
+            + 'data-child="' + String(i+1) + '" value="'
+            + toggleLabels[i] + '">\n';
+        }
+      
+        opacityControlsHTML += '</div>\n';
+
+        widgetDiv.insertAdjacentHTML(
+          "beforeend",
+          opacityControlsHTML
+        );
+
+        activateOpacityControls = true;
+      }
+    }
+  }
+
+  // Load PLY files
   for (let index = 0; index < x.paths.length; index++) {
     loadPLY(x, index, identifier);
   }
 
+  if (activateOpacityControls) {
+    let plyLoadComplete = setInterval(
+      function () {
+        // Get every mesth type object
+        let plyIds = window[identifier].scene
+          .children.filter(obj => obj.type === "Mesh");
+    
+        if (plyIds.length === x.paths.length) {
+          window[identifier].plyIds = plyIds;
+          updateOpacity(identifier);
+          OpacityControls(identifier);
+          clearInterval(plyLoadComplete);
+        }
+      }, 2000
+    );
+    
+  }
+  
   // resize
   window.addEventListener("resize", onWindowResize(identifier), false);
+  
 }
 
 function onWindowResize(identifier) {

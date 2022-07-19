@@ -15,3 +15,8 @@ dependencies:
     version: 1.0
     src: htmlwidgets/startScene
     script: "start-scene.js"
+  - name: OpacityControls
+    version: 1.0
+    src: htmlwidgets/opacityControls
+    script: "script.js"
+    stylesheet: "styles.css"
