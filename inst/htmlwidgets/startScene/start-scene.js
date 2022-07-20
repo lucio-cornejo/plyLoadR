@@ -30,10 +30,9 @@ function loadPLY(x, index, identifier) {
           mock.position.set(Math.random() * 10.0, Math.random() * 10.0, Math.random() * 10.0);
           mock.updateMatrix();
           mesh.setMatrixAt(0, mock.matrix);
-        } else {
-          mesh = new THREE.Mesh(geometry, material);
         } 
       }
+      mesh = new THREE.Mesh(geometry, material);
     }
 
     // mesh.scale.multiplyScalar(0.035);
