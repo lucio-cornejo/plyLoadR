@@ -20,15 +20,15 @@ dependencies:
     src: htmlwidgets/opacityControls
     script: "script.js"
     stylesheet: "styles.css"
-  - name: SelectBox
+  - name: SelectionBox
     version: 134
-    src: htmlwidgets/selectBox
+    src: htmlwidgets/selectionBox
     script: "SelectionBox.js"
-  - name: SelectBox
+  - name: SelectionBoxHelper
     version: 134
-    src: htmlwidgets/selectBox
+    src: htmlwidgets/selectionBox
     script: "SelectionHelper.js"
-  - name: SelectBox
+  - name: SelectionBoxStyle
     version: 134
-    src: htmlwidgets/selectBox
+    src: htmlwidgets/selectionBox
     stylesheet: "styles.css"
