@@ -14,6 +14,9 @@ plyLoadR(
   elementId = NULL
 )
 }
+\arguments{
+\item{plyFiles}{A list of ply files to load.}
+}
 \description{
-<Add Description>
+Load ply files into a three.js scene
 }

@@ -3,13 +3,16 @@ function loadPLY(x, index, identifier) {
   loader.load(x.paths[index], function (geometry) {
     geometry.computeVertexNormals();
     
-    let material = new THREE.MeshStandardMaterial({
+    // let material = new THREE.MeshStandardMaterial({
+    let material = new THREE.MeshPhongMaterial({
       wireframe: false,
       opacity: 1,
       transparent: false,
       vertexColors: THREE.VertexColors
     });
 
+    let mesh;
+    
     if (x.settings) {
       if ('isWireframe' in x.settings) {
         material.wireframe = x.settings.isWireframe[index];
@@ -20,9 +23,19 @@ function loadPLY(x, index, identifier) {
       if ('opacity' in x.settings) {
         material.opacity = x.settings.opacity[index];
       }
+      if ('isInstancedMesh' in x.settings) {
+        if (x.settings.isInstancedMesh === true) {
+          mesh = new THREE.InstancedMesh(geometry, material, 1);
+          const mock = new THREE.Object3D();
+          mock.position.set(Math.random() * 10.0, Math.random() * 10.0, Math.random() * 10.0);
+          mock.updateMatrix();
+          mesh.setMatrixAt(0, mock.matrix);
+        } else {
+          mesh = new THREE.Mesh(geometry, material);
+        } 
+      }
     }
 
-    let mesh = new THREE.Mesh(geometry, material);
     // mesh.scale.multiplyScalar(0.035);
     
     window[identifier]["scene"].add(mesh);
