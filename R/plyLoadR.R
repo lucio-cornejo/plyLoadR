@@ -1,6 +1,7 @@
 #' Load ply files into a three.js scene
 #'
-#' @param plyFiles A list of ply files to load.
+#' @param paths Paths of the ply files to load.
+#' @param localFiles Boolean. 
 #'
 #' @import htmlwidgets
 #'

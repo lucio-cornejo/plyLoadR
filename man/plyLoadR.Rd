@@ -15,7 +15,9 @@ plyLoadR(
 )
 }
 \arguments{
-\item{plyFiles}{A list of ply files to load.}
+\item{paths}{Paths of the ply files to load.}
+
+\item{localFiles}{Boolean.}
 }
 \description{
 Load ply files into a three.js scene
