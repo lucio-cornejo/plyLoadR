@@ -59,10 +59,11 @@ plyLoadR <- function(paths, localFiles = TRUE, plyCopiesFolder = "ply_local_copi
     }
     for (setting in names(x$settings)) {
       if (setting %in% settings_to_expand) {
-        x$settings[[setting]] <- rep(
-          x$settings[[setting]], 
-          length.out = length(x$paths)
-        )
+        if (length(x$paths) > 1) {
+          x$settings[[setting]] <- rep(x$settings[[setting]], length.out = length(x$paths))
+        } else {
+          x$settings[[setting]] <- list(x$settings[[setting]])
+        }
       }
     }
   } 

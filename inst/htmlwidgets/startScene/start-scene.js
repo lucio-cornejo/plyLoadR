@@ -30,9 +30,6 @@ function loadPLY(x, index, identifier) {
 }
 
 function init(x, identifier) {
-
-  console.log(x);
-
   window[identifier] = {};
   let widgetDiv = document.getElementById(identifier);
   
