@@ -11,7 +11,7 @@ function loadPLY(x, index, identifier) {
       vertexColors: THREE.VertexColors
     });
 
-    let mesh;
+    let mesh = new THREE.Mesh(geometry, material);
     
     if (x.settings) {
       if ('isWireframe' in x.settings) {
@@ -32,7 +32,6 @@ function loadPLY(x, index, identifier) {
           mesh.setMatrixAt(0, mock.matrix);
         } 
       }
-      mesh = new THREE.Mesh(geometry, material);
     }
 
     // mesh.scale.multiplyScalar(0.035);
