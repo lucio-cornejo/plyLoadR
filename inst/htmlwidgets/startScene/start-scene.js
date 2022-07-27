@@ -1,17 +1,16 @@
 function loadPLY(x, index, identifier) {
   let loader = new THREE.PLYLoader();
   loader.load(x.paths[index], function (geometry) {
-    geometry.computeVertexNormals();
-    
-    // let material = new THREE.MeshStandardMaterial({
-    let material = new THREE.MeshPhongMaterial({
+    // geometry.computeVertexNormals();
+    const material = new THREE.MeshStandardMaterial({
       wireframe: false,
       opacity: 1,
       transparent: false,
-      vertexColors: THREE.VertexColors
+      vertexColors: true
+      // vertexColors: THREE.VertexColors
     });
 
-    let mesh = new THREE.Mesh(geometry, material);
+    const mesh = new THREE.Mesh(geometry, material);
     
     if (x.settings) {
       if ('isWireframe' in x.settings) {
@@ -23,15 +22,6 @@ function loadPLY(x, index, identifier) {
       if ('opacity' in x.settings) {
         material.opacity = x.settings.opacity[index];
       }
-      if ('isInstancedMesh' in x.settings) {
-        if (x.settings.isInstancedMesh === true) {
-          mesh = new THREE.InstancedMesh(geometry, material, 1);
-          const mock = new THREE.Object3D();
-          mock.position.set(Math.random() * 10.0, Math.random() * 10.0, Math.random() * 10.0);
-          mock.updateMatrix();
-          mesh.setMatrixAt(0, mock.matrix);
-        } 
-      }
     }
 
     // mesh.scale.multiplyScalar(0.035);
@@ -42,13 +32,13 @@ function loadPLY(x, index, identifier) {
 
 function init(x, identifier) {
   window[identifier] = {};
-  let widgetDiv = document.getElementById(identifier);
+  const widgetDiv = document.getElementById(identifier);
   
   // renderer
   renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(window.devicePixelRatio);
-  // renderer.setSize(window.innerWidth / 1.715, window.innerHeight / 1.715);
-  renderer.setSize(window.innerWidth / 1.776, window.innerHeight / 1.586);
+  renderer.setSize(widgetDiv.clientWidth, widgetDiv.clientHeight);
+  // renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.outputEncoding = THREE.sRGBEncoding;
   renderer.shadowMap.enabled = true;
   widgetDiv.appendChild( renderer.domElement );
@@ -61,7 +51,8 @@ function init(x, identifier) {
 
   // Camera
   camera = new THREE.PerspectiveCamera(
-    35, window.innerWidth / window.innerHeight,
+    // 35, window.innerWidth / window.innerHeight,
+    35, widgetDiv.clientWidth / widgetDiv.clientHeight,
     1, 1000
   );
   camera.position.set(25, 25, 25);
@@ -155,19 +146,22 @@ function init(x, identifier) {
         }
       }, 2000
     );
-    
   }
-  
-  // resize
-  window.addEventListener("resize", onWindowResize(identifier), false);
-  
 }
 
-function onWindowResize(identifier) {
-  window[identifier]["camera"].aspect = window.innerWidth / window.innerHeight;
-  window[identifier]["camera"].updateProjectionMatrix();
-  window[identifier]["renderer"].setSize(window.innerWidth / 1.715, window.innerHeight / 1.715);
-}
+// Resize canvas and its container
+window.addEventListener("resize", function () {
+  const containers = [...document.querySelectorAll("canvas")];
+  containers.forEach(canvas => {
+    const container = canvas.parentNode;
+    const identifier = container.id;
+    window[identifier].camera.aspect = container.clientWidth / container.clientHeight;
+    // window[identifier]["camera"].aspect = window.innerWidth / window.innerHeight;
+    window[identifier].camera.updateProjectionMatrix();
+    window[identifier].renderer.setSize(container.clientWidth, container.clientHeight);
+    // window[identifier]["renderer"].setSize(window.innerWidth / 1.715, window.innerHeight / 1.715);
+  });
+}, false);
 
 function animate(identifier) {
   requestAnimationFrame( function () { animate(identifier) } );  
