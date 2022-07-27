@@ -32,3 +32,76 @@ dependencies:
     version: 134
     src: htmlwidgets/selectionBox
     stylesheet: "styles.css"
+  # three-mesh-bvh dependencies
+  - name: dat.gui.min
+    version: 0.5.15
+    src: "htmlwidgets/three-mesh-bvh"
+    script: "dat.gui.min.js"
+  - name: Constants
+    version: 0.5.15
+    src: "htmlwidgets/three-mesh-bvh"
+    script: "Constants.js"
+  - name: MeshBVHNode
+    version: 0.5.15
+    src: "htmlwidgets/three-mesh-bvh"
+    script: "MeshBVHNode.js"
+  - name: ArrayBoxUtilities
+    version: 0.5.15
+    src: "htmlwidgets/three-mesh-bvh"
+    script: "ArrayBoxUtilities.js"
+  - name: buildFunctions
+    version: 0.5.15
+    src: "htmlwidgets/three-mesh-bvh"
+    script: "buildFunctions.js"
+  - name: SeparatingAxisBounds
+    version: 0.5.15
+    src: "htmlwidgets/three-mesh-bvh"
+    script: "SeparatingAxisBounds.js"
+  - name: MathUtilities
+    version: 0.5.15
+    src: "htmlwidgets/three-mesh-bvh"
+    script: "MathUtilities.js"
+  - name: ExtendedTriangle
+    version: 0.5.15
+    src: "htmlwidgets/three-mesh-bvh"
+    script: "ExtendedTriangle.js"
+  - name: OrientedBox
+    version: 0.5.15
+    src: "htmlwidgets/three-mesh-bvh"
+    script: "OrientedBox.js"
+  - name: ThreeRayIntersectUtilities
+    version: 0.5.15
+    src: "htmlwidgets/three-mesh-bvh"
+    script: "ThreeRayIntersectUtilities.js"
+  - name: GeometryRayIntersectUtilities
+    version: 0.5.15
+    src: "htmlwidgets/three-mesh-bvh"
+    script: "GeometryRayIntersectUtilities.js"
+  - name: TriangleUtilities
+    version: 0.5.15
+    src: "htmlwidgets/three-mesh-bvh"
+    script: "TriangleUtilities.js"
+  - name: PrimitivePool
+    version: 0.5.15
+    src: "htmlwidgets/three-mesh-bvh"
+    script: "PrimitivePool.js"
+  - name: nodeBufferFunctions
+    version: 0.5.15
+    src: "htmlwidgets/three-mesh-bvh"
+    script: "nodeBufferFunctions.js"
+  - name: castFunctions
+    version: 0.5.15
+    src: "htmlwidgets/three-mesh-bvh"
+    script: "castFunctions.js"
+  - name: MeshBVH
+    version: 0.5.15
+    src: "htmlwidgets/three-mesh-bvh"
+    script: "MeshBVH.js"
+  - name: MeshBVHVisualizer
+    version: 0.5.15
+    src: "htmlwidgets/three-mesh-bvh"
+    script: "MeshBVHVisualizer.js"
+  - name: ExtensionUtilities
+    version: 0.5.15
+    src: "htmlwidgets/three-mesh-bvh"
+    script: "ExtensionUtilities.js"

@@ -4,8 +4,9 @@ function loadPLY(x, index, identifier) {
     // geometry.computeVertexNormals();
     const material = new THREE.MeshStandardMaterial({
       wireframe: false,
-      opacity: 1,
       transparent: false,
+      opacity: 1,
+      roughness: 1,
       vertexColors: true
       // vertexColors: THREE.VertexColors
     });
@@ -149,7 +150,7 @@ function init(x, identifier) {
   }
 }
 
-// Resize canvas and its container
+// Resize every canvas and their containers
 window.addEventListener("resize", function () {
   const containers = [...document.querySelectorAll("canvas")];
   containers.forEach(canvas => {
