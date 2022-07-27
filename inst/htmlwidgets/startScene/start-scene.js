@@ -1,34 +1,36 @@
 function loadPLY(x, index, identifier) {
-  let loader = new THREE.PLYLoader();
-  loader.load(x.paths[index], function (geometry) {
-    // geometry.computeVertexNormals();
-    const material = new THREE.MeshStandardMaterial({
-      wireframe: false,
-      transparent: false,
-      opacity: 1,
-      roughness: 1,
-      vertexColors: true
-      // vertexColors: THREE.VertexColors
+  if (index < x.paths.length) {
+    const loader = new THREE.PLYLoader();
+    loader.load(x.paths[index], function (geometry) {
+      // geometry.computeVertexNormals();
+      const material = new THREE.MeshStandardMaterial({
+        wireframe: false,
+        transparent: false,
+        opacity: 1,
+        roughness: 1,
+        vertexColors: true
+        // vertexColors: THREE.VertexColors
+      });
+
+      const mesh = new THREE.Mesh(geometry, material);
+      
+      if (x.settings) {
+        if ('isWireframe' in x.settings) {
+          material.wireframe = x.settings.isWireframe[index];
+        }
+        if ('isTransparent' in x.settings) {
+          material.transparent = x.settings.isTransparent[index];
+        }
+        if ('opacity' in x.settings) {
+          material.opacity = x.settings.opacity[index];
+        }
+      }
+
+      // mesh.scale.multiplyScalar(0.035);
+      window[identifier]["scene"].add(mesh);
+      loadPLY(x, index + 1, identifier);
     });
-
-    const mesh = new THREE.Mesh(geometry, material);
-    
-    if (x.settings) {
-      if ('isWireframe' in x.settings) {
-        material.wireframe = x.settings.isWireframe[index];
-      }
-      if ('isTransparent' in x.settings) {
-        material.transparent = x.settings.isTransparent[index];
-      }
-      if ('opacity' in x.settings) {
-        material.opacity = x.settings.opacity[index];
-      }
-    }
-
-    // mesh.scale.multiplyScalar(0.035);
-    
-    window[identifier]["scene"].add(mesh);
-  });
+  }
 }
 
 function init(x, identifier) {
@@ -128,9 +130,7 @@ function init(x, identifier) {
   }
 
   // Load PLY files
-  for (let index = 0; index < x.paths.length; index++) {
-    loadPLY(x, index, identifier);
-  }
+  loadPLY(x, 0, identifier);
 
   if (activateOpacityControls) {
     let plyLoadComplete = setInterval(
