@@ -2,12 +2,11 @@ function loadPLY(x, index, identifier) {
   if (index < x.paths.length) {
     const loader = new THREE.PLYLoader();
     loader.load(x.paths[index], function (geometry) {
-      // geometry.computeVertexNormals();
+      geometry.computeVertexNormals();
       const material = new THREE.MeshStandardMaterial({
         wireframe: false,
         transparent: false,
         opacity: 1,
-        roughness: 1,
         vertexColors: true
         // vertexColors: THREE.VertexColors
       });
