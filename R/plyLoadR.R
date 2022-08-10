@@ -45,29 +45,27 @@ plyLoadR <- function(paths, localFiles = TRUE, plyCopiesFolder = "ply_local_copi
     settings = ...
   )
 
-  # Expand some arguments in "settings", if their
+  # Expand certain arguments if their
   # length doesn't match the number of paths given.
-  if ("settings" %in% names(x)) {
-    settings_to_expand <- c(
-      "isWireframe",
-      "isTransparent",
-      "opacity",
-      "toggleLabels"
-    )
-    # Remove names for values to be applied as labels
-    if ("toggleLabels" %in% names(x$settings)) {
-      x$settings[["toggleLabels"]] <- unname(x$settings[["toggleLabels"]])
-    }
-    for (setting in names(x$settings)) {
-      if (setting %in% settings_to_expand) {
-        if (length(x$paths) > 1) {
-          x$settings[[setting]] <- rep(x$settings[[setting]], length.out = length(x$paths))
-        } else {
-          x$settings[[setting]] <- list(x$settings[[setting]])
-        }
+  settings_to_expand <- c(
+    "isWireframe",
+    "isTransparent",
+    "opacity",
+    "toggleLabels"
+  )
+  # Remove names for values to be applied as labels
+  if ("toggleLabels" %in% names(x)) {
+    x[["toggleLabels"]] <- unname(x[["toggleLabels"]])
+  }
+  for (setting in names(x)) {
+    if (setting %in% settings_to_expand) {
+      if (length(x$paths) > 1) {
+        x[[setting]] <- rep(x[[setting]], length.out = length(x$paths))
+      } else {
+        x[[setting]] <- list(x[[setting]])
       }
     }
-  } 
+  }
   
   # Create widget
   htmlwidgets::createWidget(
