@@ -7,12 +7,6 @@
 #'
 #' @export
 plyLoadR <- function(paths, localFiles = TRUE, plyCopiesFolder = "ply_local_copies", ..., width = NULL, height = NULL, elementId = NULL) {
-  
-  
-  # Checking out github dev
-  
-  
-  
   # If the files are not contained in some path further down
   # the file where this widget is being used, then, loading
   # the ply files in a local server will not be possible.
