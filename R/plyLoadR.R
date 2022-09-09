@@ -6,7 +6,10 @@
 #' @import htmlwidgets
 #'
 #' @export
-plyLoadR <- function(paths, localFiles = TRUE, plyCopiesFolder = "ply_local_copies", ..., width = NULL, height = NULL, elementId = NULL) {
+plyLoadR <- function(
+  paths, localFiles = TRUE, plyCopiesFolder = "ply_local_copies", ...,
+  width = NULL, height = NULL, elementId = NULL
+  ) {
   # If the files are not contained in some path further down
   # the file where this widget is being used, then, loading
   # the ply files in a local server will not be possible.
@@ -101,7 +104,7 @@ plyLoadR <- function(paths, localFiles = TRUE, plyCopiesFolder = "ply_local_copi
 #'
 #' @export
 plyLoadROutput <- function(outputId, width = '100%', height = '400px'){
-  htmlwidgets::shinyWidgetOutput(outputId, 'plyLoadeR', width, height, package = 'plyLoadeR')
+  htmlwidgets::shinyWidgetOutput(outputId, 'plyLoadR', width, height, package = 'plyLoadR')
 }
 
 #' @rdname plyLoadR-shiny
