@@ -38,7 +38,8 @@ function init(x, identifier) {
   window[identifier] = {};
   const widgetDiv = document.getElementById(identifier);
 
-  // Delete every possible existing canvas in widgetDiv
+  // Delete every possible existing canvas in widgetDiv,
+  // due to an issue when using plyLoadR() in a Shiny app
   while (widgetDiv.firstChild) {
     widgetDiv.removeChild(widgetDiv.firstChild);
   }
@@ -127,8 +128,7 @@ function init(x, identifier) {
       opacityControlsHTML += '</div>\n';
 
       widgetDiv.parentNode.insertAdjacentHTML(
-        "beforeend",
-        opacityControlsHTML
+        "beforeend", opacityControlsHTML
       );
 
       activateOpacityControls = true;
