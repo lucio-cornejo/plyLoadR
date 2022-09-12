@@ -37,6 +37,11 @@ function loadPLY(x, index, identifier) {
 function init(x, identifier) {
   window[identifier] = {};
   const widgetDiv = document.getElementById(identifier);
+
+  // Delete every possible existing canvas in widgetDiv
+  while (widgetDiv.firstChild) {
+    widgetDiv.removeChild(widgetDiv.firstChild);
+  }
   
   // renderer
   renderer = new THREE.WebGLRenderer({ antialias: true });
