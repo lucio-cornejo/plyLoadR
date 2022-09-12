@@ -103,7 +103,7 @@ plyLoadR <- function(
 #' @name plyLoadR-shiny
 #'
 #' @export
-plyLoadROutput <- function(outputId, width = '100%', height = '400px'){
+plyLoadROutput <- function(outputId, width = '100%', height = '65vh'){
   htmlwidgets::shinyWidgetOutput(outputId, 'plyLoadR', width, height, package = 'plyLoadR')
 }
 
