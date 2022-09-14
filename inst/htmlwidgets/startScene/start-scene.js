@@ -109,9 +109,8 @@ function init(x, identifier) {
 
       // Set labels for opacity buttons
       let toggleLabels = [...Array(x.paths.length).keys()];
-      if (x.toggleLabels) {
-        toggleLabels = x.toggleLabels;
-      }
+      if (x.toggleLabels) { toggleLabels = x.toggleLabels; }
+
       opacityControlsHTML +=
         '  <input type="button" class="opacity-button selected"'
         + ' data-child="1' + '" value="' 
@@ -127,10 +126,16 @@ function init(x, identifier) {
     
       opacityControlsHTML += '</div>\n';
 
-      widgetDiv.parentNode.insertAdjacentHTML(
+      widgetDiv.insertAdjacentHTML(
         "beforeend", opacityControlsHTML
       );
 
+      // Hide opacity slider if there is only one ply file
+      if (x.paths.length === 1) {
+        document.getElementById(identifier + "Slider")
+          .style.display = "none";
+      }
+      
       activateOpacityControls = true;
     }
   }

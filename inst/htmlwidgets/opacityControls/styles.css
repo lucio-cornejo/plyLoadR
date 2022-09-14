@@ -4,11 +4,12 @@
 }
 .opacity-buttons-section {
   display: flex;
+  margin-top: 15px;
   justify-content: space-between;
 }
 input[type="button"].opacity-button:hover {
-  background-color: rgb(80, 200, 120);
+  background-color: rgba(80, 200, 120, 0.35);
 }
 input[type="button"].opacity-button.selected {
-  background-color: rgb(34, 139, 34);
+  background-color: rgb(0, 255, 85);
 }
