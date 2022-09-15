@@ -8,7 +8,7 @@
 #' @export
 plyLoadR <- function(
   paths, localFiles = TRUE, plyCopiesFolder = "ply_local_copies", ...,
-  width = NULL, height = NULL, elementId = NULL
+  width = "100%", height = "65vh", elementId = NULL
   ) {
   # If the files are not contained in some path further down
   # the file where this widget is being used, then, loading
@@ -79,7 +79,7 @@ plyLoadR <- function(
     package = 'plyLoadR',
     elementId = elementId,
     sizingPolicy = htmlwidgets::sizingPolicy(
-      defaultWidth = "100%",
+      # defaultWidth = "100%",
       padding = 0,
       browser.fill = FALSE
     )
@@ -103,7 +103,7 @@ plyLoadR <- function(
 #' @name plyLoadR-shiny
 #'
 #' @export
-plyLoadROutput <- function(outputId, width = '90%', height = '65vh'){
+plyLoadROutput <- function(outputId, width = '100%', height = '65vh'){
   htmlwidgets::shinyWidgetOutput(outputId, 'plyLoadR', width, height, package = 'plyLoadR')
 }
 
@@ -113,3 +113,7 @@ renderPlyLoadR <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
   htmlwidgets::shinyRenderWidget(expr, plyLoadROutput, env, quoted = TRUE)
 }
+
+#' @rdname plyLoadR-HTML-container
+#' @export
+plyLoadR_html <- function(...) { htmltools::tags$div(htmltools::tags$div(...)) }
