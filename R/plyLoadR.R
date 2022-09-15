@@ -114,6 +114,7 @@ renderPlyLoadR <- function(expr, env = parent.frame(), quoted = FALSE) {
   htmlwidgets::shinyRenderWidget(expr, plyLoadROutput, env, quoted = TRUE)
 }
 
-#' @rdname plyLoadR-HTML-container
+#' plyLoadR-HTML-container
+#' 
 #' @export
 plyLoadR_html <- function(...) { htmltools::tags$div(htmltools::tags$div(...)) }

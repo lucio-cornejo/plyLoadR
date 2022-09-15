@@ -6,7 +6,7 @@
 \alias{renderPlyLoadR}
 \title{Shiny bindings for plyLoadR}
 \usage{
-plyLoadROutput(outputId, width = "90\%", height = "65vh")
+plyLoadROutput(outputId, width = "100\%", height = "65vh")
 
 renderPlyLoadR(expr, env = parent.frame(), quoted = FALSE)
 }

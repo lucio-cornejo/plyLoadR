@@ -2,5 +2,6 @@
 
 export(plyLoadR)
 export(plyLoadROutput)
+export(plyLoadR_html)
 export(renderPlyLoadR)
 import(htmlwidgets)

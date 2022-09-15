@@ -9,8 +9,8 @@ plyLoadR(
   localFiles = TRUE,
   plyCopiesFolder = "ply_local_copies",
   ...,
-  width = NULL,
-  height = NULL,
+  width = "100\%",
+  height = "65vh",
   elementId = NULL
 )
 }
