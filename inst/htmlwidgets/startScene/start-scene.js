@@ -95,13 +95,62 @@ function init(x, identifier) {
 
   // By default, do not insert controls for opacity
   activateOpacityControls = false;
+
+
+  /* 
+    Functions for passing camera or controls settings 
+  */
+  function rKeys(o, path = "") {
+    if (
+      typeof o === 'object' &&
+      !Array.isArray(o) &&
+      o !== null
+    ) { } else { return path; }
+  
+    return Object.keys(o).map(
+      key => rKeys(o[key], path ? [path, key].join(".") : key)
+    );
+  }
+  
+  const objectPaths = (o) => { return rKeys(o).toString().split(",") }
+
+  /* 
+    Update relevant settings for camera and controls
+  */
   if (x.camera) {
-    if (x.camera.position) {
-      camera.position.x = x.camera.position[0];
-      camera.position.y = x.camera.position[1];
-      camera.position.z = x.camera.position[2];
+    // Set new settings for camera
+    for (const keyPath of objectPaths(x.camera)) {
+      let oldSettings = camera;
+      let newSettings = x.camera;
+      
+      const arr = keyPath.split(".");
+      while (arr.length > 1) {
+        oldSettings = oldSettings[arr[0]];
+        newSettings = newSettings[arr[0]];
+        arr.shift();
+      }
+      
+      oldSettings[arr[0]] = newSettings[arr[0]];
     }
   }
+  if (x.controls) {
+    // Set new settings for TrackballControls
+    for (const keyPath of objectPaths(x.controls)) {
+      let oldSettings = controls;
+      let newSettings = x.controls;
+      
+      const arr = keyPath.split(".");
+      while (arr.length > 1) {
+        oldSettings = oldSettings[arr[0]];
+        newSettings = newSettings[arr[0]];
+        arr.shift();
+      }
+      
+      oldSettings[arr[0]] = newSettings[arr[0]];
+    }
+  }
+
+
   if (x.toggleWidgets) {
     if (x.toggleWidgets === true) {
       // Insert slider for opacity
@@ -189,4 +238,38 @@ function animate(identifier) {
   window[identifier]["renderer"].render(
     window[identifier]["scene"], window[identifier]["camera"]
   );
+}
+
+/* Display basic json as an R list */ 
+function objectToRList(obj) {
+  let RList = JSON.stringify(obj);
+  // Transform characters in order to
+  // match the R list representation
+  RList = RList.replaceAll("{", "list(");
+  RList = RList.replaceAll("}", ")");
+  RList = RList.replaceAll("\"", "");
+  RList = RList.replaceAll(":", " = ");
+  RList = RList.replaceAll(",", ", ");
+
+  return RList;
+}
+
+/* 
+  Get values necessary to replicate
+  manually altered camera settings 
+*/
+function getCurrentPerspective(identifier) {
+  const camera = window[identifier]["camera"];
+  const controls = window[identifier]["controls"];
+
+  let position = objectToRList(camera.position);
+  let target = objectToRList(controls.target);
+  let up = objectToRList(camera.up);
+  
+  console.log("%ccamera.position", "color: green;");
+  console.log(position);
+  console.log("%ccamera.up", "color: green;");
+  console.log(up);
+  console.log("%ccontrols.target", "color: green;");
+  console.log(target);
 }

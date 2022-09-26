@@ -1,5 +1,7 @@
 # plyLoadR
 
+[Summary](https://github.com/lucio-cornejo/plyLoadR/blob/main/plyLoadR-summary.pdf) of this package.
+
 ## Goal
 
 The plyLoadR htmlwidget aims to provide an alternative
