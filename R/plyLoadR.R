@@ -7,8 +7,11 @@
 #'
 #' @export
 plyLoadR <- function(
-  paths, localFiles = TRUE, plyCopiesFolder = "ply_local_copies", ...,
-  width = "100%", height = "65vh", elementId = NULL
+  paths, localFiles = TRUE, plyCopiesFolder = "ply_local_copies",
+  isWireframe = FALSE, isTransparent = FALSE, opacity = 1,
+  camera = NULL, controls = NULL, elementId = NULL, 
+  toggleMeshes = NULL, showLoadingProgress = FALSE, 
+  width = "100%", height = "65vh"
   ) {
   # If the files are not contained in some path further down
   # the file where this widget is being used, then, loading
@@ -44,22 +47,28 @@ plyLoadR <- function(
 
   x = list(
     paths = as.list(new_paths),
-    localFiles = localFiles,
-    settings = ...
+    isWireframe = isWireframe,
+    isTransparent = isTransparent,
+    opacity = opacity,
+    camera = camera,
+    controls = controls,
+    toggleMeshes = toggleMeshes,
+    showLoadingProgress = showLoadingProgress
+    # settings = ...
   )
 
-  # Expand certain arguments if their
-  # length doesn't match the number of paths given.
+  # :::::::::::::::::::::::::::::::::::::::::::
+  # Expand certain arguments if their length
+  # doesn't match the number of paths given.
   settings_to_expand <- c(
     "isWireframe",
     "isTransparent",
-    "opacity",
-    "toggleLabels"
+    "opacity"
   )
   # Remove names for values to be applied as labels
-  if ("toggleLabels" %in% names(x)) {
-    x[["toggleLabels"]] <- unname(x[["toggleLabels"]])
-  }
+  # if ("toggleLabels" %in% names(x)) {
+    # x[["toggleLabels"]] <- unname(x[["toggleLabels"]])
+  # }
   for (setting in names(x)) {
     if (setting %in% settings_to_expand) {
       if (length(x$paths) > 1) {
@@ -69,6 +78,7 @@ plyLoadR <- function(
       }
     }
   }
+  # :::::::::::::::::::::::::::::::::::::::::::
   
   # Create widget
   htmlwidgets::createWidget(

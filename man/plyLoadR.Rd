@@ -8,10 +8,16 @@ plyLoadR(
   paths,
   localFiles = TRUE,
   plyCopiesFolder = "ply_local_copies",
-  ...,
+  isWireframe = FALSE,
+  isTransparent = FALSE,
+  opacity = 1,
+  camera = NULL,
+  controls = NULL,
+  elementId = NULL,
+  toggleMeshes = NULL,
+  showLoadingProgress = FALSE,
   width = "100\%",
-  height = "65vh",
-  elementId = NULL
+  height = "65vh"
 )
 }
 \arguments{

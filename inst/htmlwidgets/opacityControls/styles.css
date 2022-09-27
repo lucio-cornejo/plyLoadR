@@ -1,15 +1,29 @@
 .opacity-slider {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 1rem;
 }
 .opacity-buttons-section {
   display: flex;
-  margin-top: 15px;
-  justify-content: space-between;
+  margin-top: 0.1rem;
+  justify-content: space-around;
+  /* justify-content: space-between; */
+}
+/* When there is no opacity slider */
+.opacity-buttons-section:nth-child(2) {
+  margin-top: 0.75rem;
+}
+
+input[type="button"].opacity-button {
+  cursor: pointer;
+  padding: 0.4rem;
+  min-height: 2rem;
+  font-size: 1.25rem;
 }
 input[type="button"].opacity-button:hover {
   background-color: rgba(80, 200, 120, 0.35);
 }
+input[type="button"].opacity-button:active,
 input[type="button"].opacity-button.selected {
   background-color: rgb(0, 255, 85);
 }
+

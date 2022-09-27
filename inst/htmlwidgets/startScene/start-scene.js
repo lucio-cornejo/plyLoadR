@@ -3,32 +3,21 @@ function loadPLY(x, index, identifier) {
     const loader = new THREE.PLYLoader();
     loader.load(x.paths[index], function (geometry) {
       geometry.computeVertexNormals();
+
       const material = new THREE.MeshStandardMaterial({
-        wireframe: false,
-        transparent: false,
-        opacity: 1,
+        wireframe: x.isWireframe[index],
+        transparent: x.isTransparent[index],
+        opacity: x.opacity[index],
         vertexColors: true
         // vertexColors: THREE.VertexColors
       });
 
       const mesh = new THREE.Mesh(geometry, material);
-      
-      if (x.isWireframe) {
-        material.wireframe = x.isWireframe[index];
-      }
-      if (x.isTransparent) {
-        material.transparent = x.isTransparent[index];
-      }
-      if (x.opacity) {
-        material.opacity = x.opacity[index];
-      }
-
       // mesh.scale.multiplyScalar(0.035);
-      
       window[identifier]["scene"].add(mesh);
 
-      // Now that this ply file has finished loading,
-      // load the next one.
+      // Now that this ply file has finished
+      // loading, load the next one.
       loadPLY(x, index + 1, identifier);
     });
   }
@@ -93,29 +82,27 @@ function init(x, identifier) {
     new THREE.HemisphereLight("rgb(255, 255, 255)", "rgb(255, 255, 255)")
   );
 
-  // By default, do not insert controls for opacity
-  activateOpacityControls = false;
-
-
   /* 
-    Functions for passing camera or controls settings 
+    Functions to access camera and/or controls settings 
   */
-  function rKeys(o, path = "") {
+  function rKeys(obj, path = "") {
     if (
-      typeof o === 'object' &&
-      !Array.isArray(o) &&
-      o !== null
+      obj !== null &&
+      !Array.isArray(obj) &&
+      typeof obj === 'object'
     ) { } else { return path; }
   
-    return Object.keys(o).map(
-      key => rKeys(o[key], path ? [path, key].join(".") : key)
+    return Object.keys(obj).map(
+      key => rKeys(obj[key], path ? [path, key].join(".") : key)
     );
   }
   
-  const objectPaths = (o) => { return rKeys(o).toString().split(",") }
+  function objectPaths(obj) { 
+    return rKeys(obj).toString().split(",");
+  }
 
   /* 
-    Update relevant settings for camera and controls
+    Update relevant settings for camera and/or controls
   */
   if (x.camera) {
     // Set new settings for camera
@@ -150,10 +137,24 @@ function init(x, identifier) {
     }
   }
 
-
-  if (x.toggleWidgets) {
-    if (x.toggleWidgets === true) {
-      // Insert slider for opacity
+  if (x.toggleMeshes) {
+    /* 
+      Set label of each mesh's opacity button 
+    */
+    let meshLabels;
+    if (x.toggleMeshes.labels) {
+      meshLabels = x.toggleMeshes.labels;
+    } else {
+      meshLabels = [...Array(x.paths.length).keys()];
+    }
+    
+    /* 
+      Insert slider for opacity control of mesh evolution 
+    */
+    if (
+      x.toggleMeshes.showEvolution !== undefined && 
+      x.toggleMeshes.showEvolution === true
+    ) {
       let opacityControlsHTML = 
         '<input id="' + identifier + 'Slider'
         + '" class="opacity-slider plyLoadR" type="range"'
@@ -164,21 +165,17 @@ function init(x, identifier) {
       opacityControlsHTML += 
         '<div class="opacity-buttons-section plyLoadR">\n'
 
-      // Set labels for opacity buttons
-      let toggleLabels = [...Array(x.paths.length).keys()];
-      if (x.toggleLabels) { toggleLabels = x.toggleLabels; }
-
       opacityControlsHTML +=
         '  <input type="button" class="opacity-button selected"'
         + ' data-child="1' + '" value="' 
-        + toggleLabels[0] + '" >\n';
+        + meshLabels[0] + '" >\n';
 
       // Insert remaining buttons
       for (let i=1; i < x.paths.length; i++) {
         opacityControlsHTML += 
           '  <input type="button" class="opacity-button"'
           + 'data-child="' + String(i+1) + '" value="'
-          + toggleLabels[i] + '" >\n';
+          + meshLabels[i] + '" >\n';
       }
     
       opacityControlsHTML += '</div>\n';
@@ -192,30 +189,81 @@ function init(x, identifier) {
         document.getElementById(identifier + "Slider")
           .style.display = "none";
       }
-      
-      activateOpacityControls = true;
+    } 
+    
+    /*
+      Toggle meshes' opacity as 0 or 1, via buttons
+    */
+    if (
+      x.toggleMeshes.showEvolution !== "undefined" &&
+      x.toggleMeshes.showEvolution === false
+    ) {
+      // Insert div for opacity buttons
+      let opacityControlsHTML = 
+        '<div class="opacity-buttons-section plyLoadR">\n'
+
+      opacityControlsHTML +=
+        '  <input type="button" class="opacity-button selected"'
+        + ' data-child="1' + '" value="' 
+        + meshLabels[0] + '" >\n';
+
+      // Insert remaining buttons
+      for (let i=1; i < x.paths.length; i++) {
+        opacityControlsHTML += 
+          '  <input type="button" class="opacity-button"'
+          + 'data-child="' + String(i+1) + '" value="'
+          + meshLabels[i] + '" >\n';
+      }
+    
+      opacityControlsHTML += '</div>\n';
+
+      widgetDiv.parentNode.insertAdjacentHTML(
+        "beforeend", opacityControlsHTML
+      );
     }
   }
 
   // Load PLY files
   loadPLY(x, 0, identifier);
+  
+  let plyLoadComplete = setInterval(
+    function () {
+      // Get every mesth type object
+      let plyIds = window[identifier].scene
+        .children.filter(obj => obj.type === "Mesh");
 
-  if (activateOpacityControls) {
-    let plyLoadComplete = setInterval(
-      function () {
-        // Get every mesth type object
-        let plyIds = window[identifier].scene
-          .children.filter(obj => obj.type === "Mesh");
-    
-        if (plyIds.length === x.paths.length) {
-          window[identifier].plyIds = plyIds;
-          updateOpacity(identifier);
-          OpacityControls(identifier);
-          clearInterval(plyLoadComplete);
-        }
-      }, 2000
-    );
-  }
+      // Only show loading progress messages if 
+      // the user has specified to show them.
+      if (x.showLoadingProgress) {
+        tempAlert(
+          "Loading complete till " + 
+          `${Math.round(100 * plyIds.length / x.paths.length)}%`,
+          1500, identifier
+        );
+      }
+
+      if (plyIds.length === x.paths.length) {
+        window[identifier].plyIds = plyIds;
+        updateOpacity(identifier);
+        OpacityControls(identifier);
+        clearInterval(plyLoadComplete);
+      }
+    }, 2000
+  );
+}
+
+// Message 
+function tempAlert(msg, duration, identifier) {
+  const el = document.createElement("div");
+  el.setAttribute(
+    "style",
+    "position: absolute; top: 0; right: 0; " + 
+    "color: white; background-color: crimson;" +
+    "margin: 0; padding: 15px;"
+  );
+  el.innerHTML = msg;
+  setTimeout(() => el.remove(), duration);
+  document.getElementById(identifier).appendChild(el);
 }
 
 // Resize every canvas and their containers
