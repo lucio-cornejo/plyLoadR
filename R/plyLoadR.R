@@ -1,6 +1,8 @@
 #' Load ply files into a three.js scene
 #'
 #' @param paths List or vector of directory paths of the ply files to load.
+#' @examples
+#' plyLoadR(paths = list("./my-ply-file.ply"), ...)
 #' @param localFiles Boolean. `TRUE` if the the ply files to load are
 #'  contained in paths down from the file where plyLoadR is called.
 #'  If `FALSE`, the ply files necessary will be copy and pasted into a
@@ -8,24 +10,40 @@
 #' @param plyCopiesFolder String. The name of the folder where the ply files
 #'  will be copied to, in case localFiles is `FALSE`. 
 #'  Default value is "ply_local_copies".
+#' @examples
+#' plyLoadR(plyCopiesFolder = "save-ply-files-here", ...)
 #' @param isWireframe Boolean vector or list. `TRUE` implies that the geometry from the
 #'  corresponding ply file will be loaded as a wireframe.
 #'  Default value is `FALSE`. 
+#' @examples
+#' plyLoadR(isWireframe = list(TRUE, TRUE), ...)
+#' plyLoadR(isWireframe = TRUE, ...)  # similar to previous example
 #' @param isTransparent Boolean vector or list. `TRUE` implies that the geometry from the
 #'   corresponding ply file will be loaded as translucent.
 #'   Default value is `FALSE`.
-#' 
+#' @examples
+#' plyLoadR(isTransparent = list(FALSE, FALSE), ...)
+#' plyLoadR(isTransparent = FALSE, ...)  # similar to previous example
 #' @param opacity Numeric vector or list. Its values must be between 0 and 1, 
 #'  setting the opacity of the corresponding ply file's loaded geometry.
 #'  Default value is 1.
+#' @examples
+#' plyLoadR(opacity = list(1, 0.2), ...)
+#' plyLoadR(opacity = list(0.5, 0.5), ...)
+#' plyLoadR(opacity = 0.5, ...)  # similar to previous example
 #' 
 #' @param camera List. Representation, in R form, of Three.js' `camera` object. 
-#'  Its properties will be directly transfered to the Three.js scene's `camera`.
+#'  Its properties will be directly transfered to the Three.js scene's `camera`,
+#'  therefore, the list's properties must be structured equivalently to a Three.js `camera`.
 #'  Default value is `NULL`.
+#' @examples
+#' plyLoadR(camera = list(position = list(x = 0, y = 0, z = 0)), ...)
 #' @param controls List. Representation, in R form, of Three.js' 
 #'   `TrackballControls` object. Its properties will be directly transfered to 
-#'   the Three.js scene's `TrackballControls`.
-#'   Default value is `NULL`.
+#'   the Three.js scene's `TrackballControls`. Therefore, the list's properties must be
+#'   structured equivalently to a Three.js `TrackballControls` object. Default value is `NULL`.
+#' @examples
+#' plyLoadR(controls = list(target = list(x = 10, y = 20, z = 30)), ...)
 #' 
 #' @param toggleMeshes List. It can contain `labels` (vector or list), 
 #'   for the labels of opacity or visibility butttons of the scene; and `showEvolution`,
