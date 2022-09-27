@@ -1,12 +1,15 @@
 Package: plyLoadR
-Title: What the Package Does (One Line, Title Case)
+Title: Load ply files into interactive 3D scenes
 Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Authors@R: c(
+    person("Lucio", "Cornejo", "luciocornejo11@gmail.com", role = c("aut", "cre")),
+    person("Evelyn", "Gutierrez", "egutierreza@pucp.edu.pe", role = c("ctb")),
+    person("Benjamín", "Castañeda", "castaneda.b@pucp.edu.pe", role = c("ctb")),
+    person("Sylvie", "Treuillet", "sylvie.treuillet@univ-orleans.fr", role = c("ctb")))
+Description: Wrapper (htmlwidget) for the JavaScript 3D library Three.js.
+  Provide ply files to be inserted into 3D scenes, similar to the rgl package,
+  but with better performance and greater graphics customizability.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1

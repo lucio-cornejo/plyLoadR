@@ -21,9 +21,47 @@ plyLoadR(
 )
 }
 \arguments{
-\item{paths}{Paths of the ply files to load.}
+\item{paths}{List or vector of directory paths of the ply files to load.}
 
-\item{localFiles}{Boolean.}
+\item{localFiles}{Boolean. \code{TRUE} if the the ply files to load are
+contained in paths down from the file where plyLoadR is called.
+If \code{FALSE}, the ply files necessary will be copy and pasted into a
+local directory.}
+
+\item{plyCopiesFolder}{String. The name of the folder where the ply files
+will be copied to, in case localFiles is \code{FALSE}.
+Default value is "ply_local_copies".}
+
+\item{isWireframe}{Boolean vector or list. \code{TRUE} implies that the geometry from the
+corresponding ply file will be loaded as a wireframe.
+Default value is \code{FALSE}.}
+
+\item{isTransparent}{Boolean vector or list. \code{TRUE} implies that the geometry from the
+corresponding ply file will be loaded as translucent.
+Default value is \code{FALSE}.}
+
+\item{opacity}{Numeric vector or list. Its values must be between 0 and 1,
+setting the opacity of the corresponding ply file's loaded geometry.
+Default value is 1.}
+
+\item{camera}{List. Representation, in R form, of Three.js' \code{camera} object.
+Its properties will be directly transfered to the Three.js scene's \code{camera}.
+Default value is \code{NULL}.}
+
+\item{controls}{List. Representation, in R form, of Three.js'
+\code{TrackballControls} object. Its properties will be directly transfered to
+the Three.js scene's \code{TrackballControls}.
+Default value is \code{NULL}.}
+
+\item{toggleMeshes}{List. It can contain \code{labels} (vector or list),
+for the labels of opacity or visibility butttons of the scene; and \code{showEvolution},
+NULL or Boolean. If \code{showEvolution} is \code{TRUE}, a slider and buttons will be added
+to control the meshes' opacity. If \code{showEvolution} is \code{FALSE}, only buttons
+will be added to control the meshes' opacity.
+Default value is \code{NULL}, for which no slider nor buttons are created.}
+
+\item{showLoadingProgress}{Boolean. \code{TRUE} implies that a progress bar will
+show, every two seconds, how many ply files have already been loaded into the scene.}
 }
 \description{
 Load ply files into a three.js scene
