@@ -45,13 +45,14 @@ setting the opacity of the corresponding ply file's loaded geometry.
 Default value is 1.}
 
 \item{camera}{List. Representation, in R form, of Three.js' \code{camera} object.
-Its properties will be directly transfered to the Three.js scene's \code{camera}.
+Its properties will be directly transfered to the Three.js scene's \code{camera},
+therefore, the list's properties must be structured equivalently to a Three.js \code{camera}.
 Default value is \code{NULL}.}
 
 \item{controls}{List. Representation, in R form, of Three.js'
 \code{TrackballControls} object. Its properties will be directly transfered to
-the Three.js scene's \code{TrackballControls}.
-Default value is \code{NULL}.}
+the Three.js scene's \code{TrackballControls}. Therefore, the list's properties must be
+structured equivalently to a Three.js \code{TrackballControls} object. Default value is \code{NULL}.}
 
 \item{toggleMeshes}{List. It can contain \code{labels} (vector or list),
 for the labels of opacity or visibility butttons of the scene; and \code{showEvolution},
@@ -65,4 +66,19 @@ show, every two seconds, how many ply files have already been loaded into the sc
 }
 \description{
 Load ply files into a three.js scene
+}
+\examples{
+plyLoadR(paths = list("./my-ply-file.ply"), ...)
+plyLoadR(plyCopiesFolder = "save-ply-files-here", ...)
+plyLoadR(isWireframe = list(TRUE, TRUE), ...)
+plyLoadR(isWireframe = TRUE, ...)  # similar to previous example
+plyLoadR(isTransparent = list(FALSE, FALSE), ...)
+plyLoadR(isTransparent = FALSE, ...)  # similar to previous example
+plyLoadR(opacity = list(1, 0.2), ...)
+plyLoadR(opacity = list(0.5, 0.5), ...)
+plyLoadR(opacity = 0.5, ...)  # similar to previous example
+
+plyLoadR(camera = list(position = list(x = 0, y = 0, z = 0)), ...)
+plyLoadR(controls = list(target = list(x = 10, y = 20, z = 30)), ...)
+
 }
