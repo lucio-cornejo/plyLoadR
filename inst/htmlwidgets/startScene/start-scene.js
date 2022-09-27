@@ -266,9 +266,9 @@ function tempAlert(msg, duration, identifier) {
   document.getElementById(identifier).appendChild(el);
 }
 
-// Resize every canvas and their containers
+// Resize every canvas created via plyLoadR, and their containers
 window.addEventListener("resize", function () {
-  const containers = [...document.querySelectorAll("canvas")];
+  const containers = [...document.querySelectorAll(".plyLoadR > canvas")];
   containers.forEach(canvas => {
     const container = canvas.parentNode;
     const identifier = container.id;
