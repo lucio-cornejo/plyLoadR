@@ -2,10 +2,10 @@ Package: plyLoadR
 Title: Load ply files into interactive 3D scenes
 Version: 0.0.0.9000
 Authors@R: c(
-    person(given = "Lucio", ,, family = "Cornejo", "luciocornejo11@gmail.com", role = c("aut", "cre")),
-    person(given = "Evelyn", ,, family = "Gutierrez", "egutierreza@pucp.edu.pe", role = c("ctb")),
-    person(given = "Benjamín", ,, family = "Castañeda", "castaneda.b@pucp.edu.pe", role = c("ctb")),
-    person(given = "Sylvie", ,, family = "Treuillet", "sylvie.treuillet@univ-orleans.fr", role = c("ctb")))
+    person(given = "Lucio", middle = "", family = "Cornejo", "luciocornejo11@gmail.com", role = c("aut", "cre")),
+    person(given = "Evelyn", middle = "", family = "Gutierrez", "egutierreza@pucp.edu.pe", role = c("ctb")),
+    person(given = "Benjamín", middle = "", family = "Castañeda", "castaneda.b@pucp.edu.pe", role = c("ctb")),
+    person(given = "Sylvie", middle = "", family = "Treuillet", "sylvie.treuillet@univ-orleans.fr", role = c("ctb")))
 Description: Wrapper (htmlwidget) for the JavaScript 3D library Three.js.
   Provide ply files to be inserted into 3D scenes, similar to the rgl package,
   but with better performance and greater graphics customizability.
