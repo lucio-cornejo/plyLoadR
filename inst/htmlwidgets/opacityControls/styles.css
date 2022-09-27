@@ -15,9 +15,9 @@
 
 input[type="button"].opacity-button {
   cursor: pointer;
-  padding: 0.4rem;
-  min-height: 2rem;
-  font-size: 1.25rem;
+  padding: 0.1rem 0.5rem;
+  /* min-height: 2rem; */
+  /* font-size: 1rem; */
 }
 input[type="button"].opacity-button:hover {
   background-color: rgba(80, 200, 120, 0.35);
