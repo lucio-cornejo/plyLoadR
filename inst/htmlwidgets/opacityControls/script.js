@@ -1,7 +1,7 @@
 function OpacityControls(identifier) {
   // Get this canvas's opacity buttons
   let opacityButtons = document.querySelectorAll(
-    "div:has(#" + identifier + ") .opacity-button"
+    "#" + identifier + " ~ .opacity-buttons-section .opacity-button"
   );
 
   // Get this canvas's slider (it may not exist)
